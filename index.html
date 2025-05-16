@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>GiftVault TON Connect</title>
-  <script defer src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+  <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js" defer></script>
 </head>
 <body style="font-family:sans-serif; text-align:center; margin-top:50px;">
 
@@ -16,7 +16,12 @@
   <div id="wallet-address" style="margin-top:15px; font-size:16px;"></div>
 
   <script>
-    window.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof TonConnectUI === 'undefined') {
+        console.error('TonConnectUI не загрузился. Проверь скрипт.');
+        return;
+      }
+
       const tonConnectUI = new TonConnectUI.TonConnectUI({
         manifestUrl: './tonconnect-manifest.json'
       });
