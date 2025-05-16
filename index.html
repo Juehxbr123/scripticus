@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>GiftVault TON Connect</title>
+  <script defer src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 </head>
 <body style="font-family:sans-serif; text-align:center; margin-top:50px;">
 
@@ -15,10 +16,7 @@
   <div id="wallet-address" style="margin-top:15px; font-size:16px;"></div>
 
   <script>
-  (function() {
-    const script = document.createElement('script');
-    script.src = 'https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js';
-    script.onload = function() {
+    window.addEventListener('DOMContentLoaded', function() {
       const tonConnectUI = new TonConnectUI.TonConnectUI({
         manifestUrl: './tonconnect-manifest.json'
       });
@@ -30,9 +28,7 @@
           document.getElementById('wallet-address').innerText = `✅ Адрес: ${connectedWallet.account.address}`;
         }
       });
-    };
-    document.body.appendChild(script);
-  })();
+    });
   </script>
 
 </body>
