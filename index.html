@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>GiftVault TON Connect</title>
+</head>
+<body style="font-family:sans-serif; text-align:center; margin-top:50px;">
+
+  <h1>GiftVault TON Connect Demo</h1>
+
+  <button id="connect-ton" style="padding:10px 20px; font-size:18px; border-radius:8px; background:#0098EA; color:#fff; border:none; cursor:pointer;">
+    🔗 Подключить TON-кошелек
+  </button>
+
+  <div id="wallet-address" style="margin-top:15px; font-size:16px;"></div>
+
+  <script>
+  (function() {
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js';
+    script.onload = function() {
+      const tonConnectUI = new TonConnectUI.TonConnectUI({
+        manifestUrl: './tonconnect-manifest.json'
+      });
+
+      document.getElementById('connect-ton').addEventListener('click', async () => {
+        await tonConnectUI.connectWallet();
+        const connectedWallet = tonConnectUI.connected;
+        if (connectedWallet) {
+          document.getElementById('wallet-address').innerText = `✅ Адрес: ${connectedWallet.account.address}`;
+        }
+      });
+    };
+    document.body.appendChild(script);
+  })();
+  </script>
+
+</body>
+</html>
